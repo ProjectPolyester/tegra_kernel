@@ -284,8 +284,10 @@ done:
 
 static int __init root_dev_setup(char *line)
 {
-	strlcpy(saved_root_name, line, sizeof(saved_root_name));
-	return 1;
+        if (strncmp(line, "/dev/mmcblk", 11) != 0)
+              return 1;
+        strlcpy(saved_root_name, line, sizeof(saved_root_name));
+        return 1;
 }
 
 __setup("root=", root_dev_setup);
